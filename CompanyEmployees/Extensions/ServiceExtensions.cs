@@ -15,9 +15,9 @@ namespace CompanyEmployees.Extensions
             {
                 options.AddPolicy("CorsPolicy", builder =>
                 // Decide which origins, methods or headers to allow : builder.AllowAnyOrigin() or .AllowAnyMethod() or .AllowAnyHeader()
-                builder.WithOrigins("https://example.com")
-                .WithMethods("POST", "GET") // or PUT, DELETE
-                .WithHeaders("accept", "content-type"));
+                builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
             });
 
         public static void ConfigureIISIntegration(this IServiceCollection services) =>

@@ -1,12 +1,14 @@
 ﻿using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Repository.Configuration;
 
 namespace Repository
 {
     public class RepositoryContext : DbContext
     {
-        public RepositoryContext(DbContextOptions options) : base(options)
+        public RepositoryContext(DbContextOptions options)
+            : base(options)
         {
         }
 
@@ -16,7 +18,7 @@ namespace Repository
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
         }
 
-        public DbSet<Company> Companies { get; set; }
-        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Company>? Companies { get; set; }
+        public DbSet<Employee>? Employees { get; set; }
     }
 }

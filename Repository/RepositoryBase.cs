@@ -9,15 +9,12 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
+    public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
-        private readonly RepositoryContext RepositoryContext;
+        protected RepositoryContext RepositoryContext;
 
-        public RepositoryBase(RepositoryContext repositoryContext)
-        {
-            RepositoryContext = repositoryContext;
-        }
-
+        public RepositoryBase(RepositoryContext repositoryContext) => RepositoryContext = repositoryContext;
+        
         public IQueryable<T> FindAll(bool trackChanges) =>
              !trackChanges ?
              RepositoryContext.Set<T>()
@@ -28,13 +25,16 @@ namespace Repository
             bool trackChanges) =>
             !trackChanges ?
             RepositoryContext.Set<T>()
-            .AsNoTracking() : 
-            RepositoryContext.Set<T>();        
+                .Where(expression)
+                .AsNoTracking() :
+            RepositoryContext.Set<T>()
+                .Where(expression);
 
         public void Create(T entity) => RepositoryContext.Set<T>().Add(entity);
 
-        public void Delete(T entity) => RepositoryContext.Set<T>().Remove(entity);
+        public void Update(T entity) => RepositoryContext.Set<T>().Update(entity);
 
-        public void Update(T entity) => RepositoryContext?.Update(entity);
+        public void Delete(T entity) => RepositoryContext.Set<T>().Remove(entity);
+        
     }
 }
