@@ -21,17 +21,16 @@ builder.Services.ConfigureSqlContext(builder.Configuration);
 
 builder.Services.AddAutoMapper(typeof(Program));
 
-builder.Services.AddControllers()
+// COnfiguration for formating the response (ex: XML, CSV, JSON)
+builder.Services.AddControllers(config =>
+{
+    config.RespectBrowserAcceptHeader = true;
+    config.ReturnHttpNotAcceptable = true;
+}).AddXmlDataContractSerializerFormatters()
+    .AddCustomCSVFormatter()
     .AddApplicationPart(typeof(CompanyEmployees.Presentation.AssemblyReference).Assembly);
 
 var app = builder.Build();
-
-// Get a reference to the logger factory
-var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-
-// Configure the logger factory
-//app.Services.AddSingleton<ILoggerFactory>(loggerFactory);
-
 
 // Configure the HTTP request pipeline.
 
@@ -39,12 +38,6 @@ var logger = app.Services.GetRequiredService<ILoggerManager>();
 app.ConfigureExceptionHandler(logger);
 if (app.Environment.IsProduction())
     app.UseHsts();
-
-
-/*if (app.Environment.IsDevelopment())
-    app.UseDeveloperExceptionPage();
-else
-    app.UseHsts();*/
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
