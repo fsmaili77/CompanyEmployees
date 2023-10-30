@@ -17,7 +17,8 @@ namespace CompanyEmployees.Extensions
                 // Decide which origins, methods or headers to allow : builder.AllowAnyOrigin() or .AllowAnyMethod() or .AllowAnyHeader()
                 builder.AllowAnyOrigin()
                 .AllowAnyMethod()
-                .AllowAnyHeader());
+                .AllowAnyHeader()
+                .WithExposedHeaders("X-Pagination"));
             });
 
         public static void ConfigureIISIntegration(this IServiceCollection services) =>
