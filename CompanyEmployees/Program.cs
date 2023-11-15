@@ -42,6 +42,9 @@ builder.Services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
 builder.Services.AddScoped<ValidateMediaTypeAttribute>();
 builder.Services.AddScoped<IEmployeeLinks, EmployeeLinks>();
 
+builder.Services.AddAuthentication();
+builder.Services.ConfigureIdentity();
+
 
 // COnfiguration for formating the response (ex: XML, CSV, JSON)
 builder.Services.AddControllers(config =>
@@ -80,6 +83,7 @@ app.UseCors("CorsPolicy");
 //app.UseResponseCaching();
 app.UseOutputCache();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
