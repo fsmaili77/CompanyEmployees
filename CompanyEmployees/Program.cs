@@ -44,6 +44,7 @@ builder.Services.AddScoped<IEmployeeLinks, EmployeeLinks>();
 
 builder.Services.AddAuthentication();
 builder.Services.ConfigureIdentity();
+builder.Services.ConfigureJWT(builder.Configuration);
 
 
 // COnfiguration for formating the response (ex: XML, CSV, JSON)
