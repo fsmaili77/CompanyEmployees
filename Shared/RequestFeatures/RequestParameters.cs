@@ -1,29 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Shared.RequestFeatures;
 
-namespace Shared.RequestFeatures
+public abstract class RequestParameters
 {
-    public abstract class RequestParameters
-    {
-        const int maxPageSize = 50;
-        public int PageNumber { get; set; } = 1;
+    const int maxPageSize = 50;
+    public int PageNumber { get; set; } = 1;
 
-        private int _pageSize = 10;
-        public int PageSize
+    private int _pageSize = 10;
+    public int PageSize
+    {
+        get
         {
-            get
-            {
-                return _pageSize;
-            }
-            set
-            {
-                _pageSize = (value > maxPageSize) ? maxPageSize : value;
-            }
+            return _pageSize;
         }
-        public string? OrderBy { get; set; }
-        public string? Fields { get; set; }
+        set
+        {
+            _pageSize = (value > maxPageSize) ? maxPageSize : value;
+        }
     }
+
+    public string? OrderBy { get; set; }
+
+    public string? Fields { get; set; }
 }

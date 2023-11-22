@@ -1,16 +1,11 @@
 ﻿using Entities.LinkModels;
 using Microsoft.AspNetCore.Http;
-using Shared.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Shared.DataTransferObjects;
 
-namespace Contracts
+namespace Contracts;
+
+public interface IEmployeeLinks
 {
-    public interface IEmployeeLinks
-    {
-        LinkResponse TryGenerateLinks(IEnumerable<EmployeeDto> employeeDto, string fields, Guid companyId, HttpContext httpContext);
-    }
+    LinkResponse TryGenerateLinks(IEnumerable<EmployeeDto> employeesDto,
+        string fields, Guid companyId, HttpContext httpContext);
 }

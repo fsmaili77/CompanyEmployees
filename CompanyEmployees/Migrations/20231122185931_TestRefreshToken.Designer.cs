@@ -12,8 +12,8 @@ using Repository;
 namespace CompanyEmployees.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20231115142851_AddedRolesToDb")]
-    partial class AddedRolesToDb
+    [Migration("20231122185931_TestRefreshToken")]
+    partial class TestRefreshToken
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -170,6 +170,12 @@ namespace CompanyEmployees.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -222,13 +228,13 @@ namespace CompanyEmployees.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "87828375-85a0-4a0c-bbe0-152be5d3fb28",
+                            Id = "9f926476-6463-4ffd-a670-f825cd625b2c",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "92de1249-3f8b-45c2-987a-5a0d016d8ac3",
+                            Id = "4113719f-02fb-4fb5-8baf-da89cf8381c9",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

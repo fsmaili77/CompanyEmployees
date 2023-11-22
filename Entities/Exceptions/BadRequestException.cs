@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Entities.Exceptions;
 
-namespace Entities.Exceptions
+public abstract class BadRequestException : Exception
 {
-    public abstract class BadRequestException : Exception
-    {
-        protected BadRequestException(string message)
+    protected BadRequestException(string message)
         : base(message)
-        {
-        }
+    {
     }
 }

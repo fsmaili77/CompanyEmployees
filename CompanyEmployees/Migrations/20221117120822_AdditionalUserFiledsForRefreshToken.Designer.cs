@@ -12,7 +12,7 @@ using Repository;
 namespace CompanyEmployees.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20231120104349_AdditionalUserFiledsForRefreshToken")]
+    [Migration("20221117120822_AdditionalUserFiledsForRefreshToken")]
     partial class AdditionalUserFiledsForRefreshToken
     {
         /// <inheritdoc />
@@ -228,13 +228,13 @@ namespace CompanyEmployees.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f1765462-5430-4b35-9213-389128f1ea25",
+                            Id = "0924462d-3d40-4ea1-a9a0-eebcbf3c8567",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "c12d4355-2293-4923-949e-9d0788e9a38b",
+                            Id = "210f1bc3-7155-40e9-bcc5-9f5edeb46151",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

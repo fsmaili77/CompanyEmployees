@@ -1,51 +1,45 @@
 ﻿using CompanyEmployees.Presentation.ActionFilters;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
-using Shared.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Shared.DataTransferObjects;
 
-namespace CompanyEmployees.Presentation.Controllers
+namespace CompanyEmployees.Presentation.Controllers;
+
+[Route("api/authentication")]
+[ApiController]
+public class AuthenticationController : ControllerBase
 {
-    [Route("api/authentication")]
-    [ApiController]
-    public class AuthenticationController : ControllerBase
+    private readonly IServiceManager _service;
+
+    public AuthenticationController(IServiceManager service) => _service = service;
+
+    [HttpPost]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
+    public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
     {
-        private readonly IServiceManager _service;
-
-        public AuthenticationController(IServiceManager service) => _service = service;
-
-        [HttpPost]
-        [ServiceFilter(typeof(ValidationFilterAttribute))]
-        public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
+        var result = await _service.AuthenticationService.RegisterUser(userForRegistration);
+        if (!result.Succeeded)
         {
-            var result = await _service.AuthenticationService.RegisterUser(userForRegistration);
-            if (!result.Succeeded)
+            foreach (var error in result.Errors)
             {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.TryAddModelError(error.Code, error.Description);
-                }
-                return BadRequest(ModelState);
+                ModelState.TryAddModelError(error.Code, error.Description);
             }
-
-            return StatusCode(201);
+            return BadRequest(ModelState);
         }
 
-        [HttpPost("login")]
-        [ServiceFilter(typeof(ValidationFilterAttribute))]
-        public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
-        {
-            if (!await _service.AuthenticationService.ValidateUser(user))
-                return Unauthorized();
+        return StatusCode(201);
+    }
 
-            var tokenDto = await _service.AuthenticationService
-                .CreateToken(populateExp: true);
-            return Ok(tokenDto);
+    [HttpPost("login")]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
+    public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
+    {
+        if (!await _service.AuthenticationService.ValidateUser(user))
+            return Unauthorized();
 
-        }
+        var tokenDto = await _service.AuthenticationService
+            .CreateToken(populateExp: true);
+
+        return Ok(tokenDto);
     }
 }

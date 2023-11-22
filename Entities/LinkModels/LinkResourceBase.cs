@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Entities.LinkModels;
 
-namespace Entities.LinkModels
+public class LinkResourceBase
 {
-    public class LinkResourceBase
-    {
-        public List<Link> Links { get; set; } = new List<Link>();
-        public LinkResourceBase()
-        {
-        }     
-    }
+    public LinkResourceBase()
+    { }
+
+    public List<Link> Links { get; set; } = new List<Link>();
 }

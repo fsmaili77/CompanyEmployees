@@ -17,8 +17,8 @@ namespace CompanyEmployees.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "87828375-85a0-4a0c-bbe0-152be5d3fb28", null, "Manager", "MANAGER" },
-                    { "92de1249-3f8b-45c2-987a-5a0d016d8ac3", null, "Administrator", "ADMINISTRATOR" }
+                    { "874f27bf-b15b-410d-9a1b-adf0f360ace4", null, "Administrator", "ADMINISTRATOR" },
+                    { "cb56c861-57e6-4d16-9109-9e206b9ea227", null, "Manager", "MANAGER" }
                 });
         }
 
@@ -28,12 +28,12 @@ namespace CompanyEmployees.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "87828375-85a0-4a0c-bbe0-152be5d3fb28");
+                keyValue: "874f27bf-b15b-410d-9a1b-adf0f360ace4");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "92de1249-3f8b-45c2-987a-5a0d016d8ac3");
+                keyValue: "cb56c861-57e6-4d16-9109-9e206b9ea227");
         }
     }
 }
